@@ -171,3 +171,9 @@ aside button:active{
     color: var(--background);
     font-weight: 600;
 }
+
+.checked>*:nth-child(1),.checked>*:nth-child(4){
+    text-decoration: line-through;
+    text-decoration-color:black;
+    text-decoration-thickness: 3px;
+}
