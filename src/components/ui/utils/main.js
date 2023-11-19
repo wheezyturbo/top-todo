@@ -1,23 +1,7 @@
-import Project from "../../core/project.js";
-import Todo from "../../core/todo.js";
+import { projects } from "../../core/projects.js";
 import render from "../pages/homePage.js";
 
-const projects = [];
-const project1 = new Project("helo");
-project1.addTodo(new Todo("what", "do the stuff", "2020-10-10", "high"));
-project1.addTodo(new Todo("what", "do the stuff", "2020-10-10", "high"));
-project1.addTodo(new Todo("what", "do the stuff", "2020-10-10", "high"));
-project1.addTodo(new Todo("what", "do the stuff", "2020-10-10", "high"));
-project1.addTodo(new Todo("what", "do the stuff", "2020-10-10", "high"));
-project1.addTodo(new Todo("what", "do the stuff", "2020-10-10", "high"));
-// Add more todos...
-projects.push(project1);
 
-const project2 = new Project("world");
-project2.addTodo(new Todo("blah", "adsklfa;sdkljfasdjd", "2023-10-23", "high"));
-project2.addTodo(new Todo("blah", "adsklfa;sdkljfasdjd", "2023-10-23", "high"));
-// Add more todos...
-projects.push(project2);
 
 function createTodoCard(todo, index, parentIndex) {
   const card = document.createElement("div");
@@ -133,5 +117,10 @@ export default function main() {
   const projectCards = createProjectCards(projects);
   main.appendChild(projectCards);
 
+  console.log(projects);
+
   return main;
 }
+
+
+export {projects};
