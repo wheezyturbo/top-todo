@@ -9,6 +9,8 @@ export default function sidebar() {
   addBtn.textContent = "New Project +";
   addBtn.addEventListener("click", (e) => {
     document.body.appendChild(addProjectForm());
+    document.querySelector('input').focus();
+
   });
   sidebar.appendChild(addBtn);
 
@@ -31,6 +33,8 @@ export default function sidebar() {
 }
 
 function addProjectForm() {
+    const div = document.createElement('div');
+    div.classList.add('add-project-div');
   const form = document.createElement("form");
   form.classList.add("add-project-form");
   const h2 = document.createElement("h2");
@@ -40,7 +44,6 @@ function addProjectForm() {
   const nameInput = document.createElement("input");
   const submit = document.createElement("button");
   submit.textContent = "Add Project";
-
   submit.addEventListener("click", (e) => {
     e.preventDefault();
     const project = new Project(nameInput.value);
@@ -48,10 +51,19 @@ function addProjectForm() {
     // document.body.removeChild(addProjectForm());
     render();
   });
-
+  const closeBtn = document.createElement('button');
+  closeBtn.textContent = "X";
+  closeBtn.classList.add('closeBtn');
+  closeBtn.addEventListener('click',(e)=>{
+    e.preventDefault();
+    document.body.removeChild(document.querySelector('.add-project-div'));
+  })
   form.appendChild(h2);
   form.appendChild(nameLabel);
   form.appendChild(nameInput);
   form.appendChild(submit);
-  return form;
+  form.appendChild(closeBtn);
+  div.appendChild(form);
+
+  return div;
 }

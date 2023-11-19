@@ -95,14 +95,13 @@ aside button:active{
   grid-template-rows: repeat(12,1fr);
 }
 .main-grid{
-    height:100%;
     background-color: var(--secondary);
     grid-row: span 11;
     margin-top:10px;
     padding-top: 10px;
-
+    height: calc(100vh - 55px); /* Subtracted 100px to account for header and any top margin */
+    overflow-y: auto; /* Add vertical scrollbar if content overflows */
 }
-
 .grid-container header {
     width: 100%;
     /* background-color: var(--secondary); */
@@ -176,4 +175,35 @@ aside button:active{
     text-decoration: line-through;
     text-decoration-color:black;
     text-decoration-thickness: 3px;
+}
+.add-project-div{
+    position: absolute;
+    left:0;
+    right:0;
+    top:0;
+    bottom:0;
+    display: flex;
+    backdrop-filter: blur(10px) grayscale() brightness(0.5);
+}
+
+.add-project-form{
+    position: relative;
+    padding:60px 40px;
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items:center;
+}
+
+.closeBtn{
+    position:absolute;
+    border:none;
+    background:none;
+    color:red;
+    right:20px;
+    top:40px;
+    font-size:2rem;
+    font-weight:600;
+
 }
