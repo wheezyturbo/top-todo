@@ -5,6 +5,7 @@ export default function header() {
   links.forEach((ele) => {
     const link = document.createElement("a");
     link.textContent = ele;
+    if(ele=="home")link.classList.add('active');
     nav.appendChild(link);
   });
   header.appendChild(nav);

@@ -16,6 +16,7 @@
   --primary: #7083fa;
   --secondary: #bac3fd;
   --accent: #0825e2;
+  --project-btn:
 }
 :root[data-theme="dark"] {
   --text: #f5f7ff;
@@ -23,6 +24,7 @@
   --primary: #05188f;
   --secondary: #020b45;
   --accent: #1d3af7;
+  --project-btn:#992ad0;
 }
 body{
     background-color:var(--background);
@@ -36,8 +38,10 @@ nav a,aside button{
 /* homePage.js */
 .grid-container {
   display: grid;
-  background:var(--secondary);
+  background:var(--background);
   height:100vh;
+  grid-template-rows: repeat(12,1fr);
+  grid-template-columns: repeat(12,1fr);
 }
 
 /* sidebar.js */
@@ -47,17 +51,31 @@ nav a,aside button{
   background-color: var(--primary);
   display: grid; 
   grid-template-rows: repeat(12,1fr);
+  height: 100vh;
 }
 aside button{
     border: none;
     border-radius: 8px;
-    background-color: var(--accent);
+    background-color: var(--project-btn);
     padding:10px 20px;
     color: var(--text);
     width: calc(100% - 60px);
     margin: 40px auto;
     cursor:pointer;
     transition: 0.1s ease-in-out;
+}
+aside .projects{
+    display: flex;
+    flex-direction:column;
+}
+aside .projects h2{
+    margin:0 auto;
+    margin-bottom:10px;
+}
+
+aside .projects button{
+    background-color: var(--accent);
+    margin: 10px auto;
 }
 
 aside button:hover{
@@ -71,8 +89,24 @@ aside button:active{
 
 
 /* header.js */
+.div-container{
+  grid-column: span 9;
+  display: grid;
+  grid-template-rows: repeat(12,1fr);
+}
+.main-grid{
+    height:100%;
+    background-color: var(--secondary);
+    grid-row: span 11;
+    margin-top:10px;
+    padding-top: 10px;
+
+}
+
 .grid-container header {
-  grid-column: 4 / span 9;
+    width: 100%;
+    /* background-color: var(--secondary); */
+    background-color: #015b8c;
 }
 
 .grid-container header nav {
@@ -81,4 +115,59 @@ aside button:active{
   grid-template-columns: repeat(3, 1fr);
   justify-items: center;
   margin-top:40px;
+}
+.grid-container header nav a{
+    cursor:pointer;
+    text-transform: capitalize;
+    transition:0.3s  ease-in-out;
+    font-size: 1.2rem;
+}
+
+.grid-container header nav a.active{
+    text-decoration: underline;
+    text-decoration-color: lightcoral;
+    color:var(--text);
+    text-decoration-thickness: 3px;
+}
+
+/* main */
+.main-container{
+    background-color: var(--secondary);
+    height:100%;
+}
+.cards{
+    width:100%;
+    display:grid;
+    grid-template-rows: 1fr;
+    gap:16px;
+    max-width: 1000px;
+    margin:0 auto;
+}
+.card{
+    display: flex;
+    width:100%;
+    justify-content:space-evenly;
+    padding:30px;
+    background-color: var(--primary);
+    border-left: 5px solid yellow;
+    border-radius: 15px;
+    box-shadow:3px 3px 3px rgb(0, 0, 0,0.25);
+    transition: 0.2s ease-in-out;
+}
+.card:hover{
+    transform: scale(1.01);
+}
+.card input[type="checkbox"]{
+    outline:none;
+    border: none;    
+}
+
+.card button{
+    border:none;
+    outline: none;
+    border-radius:10px;
+    padding:5px 10px;
+    background:var(--accent);
+    color: var(--background);
+    font-weight: 600;
 }
