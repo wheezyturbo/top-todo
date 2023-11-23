@@ -1,6 +1,7 @@
 import { projects } from "../../core/projects.js";
 import render from "../pages/homePage.js";
-
+import  addTodoButton  from "./addTodoButton.js";
+let currentpage = "home";
 
 
 function createTodoCard(todo, index, parentIndex) {
@@ -50,7 +51,7 @@ function createTodoCard(todo, index, parentIndex) {
     projects[projectIndex].todos[index].isCompleted
       ? projects[projectIndex].todos[index].setCompleted(false)
       : projects[projectIndex].todos[index].setCompleted(true);
-    render();
+    renderProjectCards(projects[parentIndex],index);
   });
   deleteBtn.addEventListener("click", (e) => {
     // console.log(projects[projectIndex].todos)
@@ -92,7 +93,7 @@ function createTodoCard(todo, index, parentIndex) {
   return card;
 }
 
-function createProjectCards(projects) {
+export function createProjectCards(projects) {
   const cards = document.createElement("div");
   cards.classList.add("cards");
 
@@ -104,10 +105,44 @@ function createProjectCards(projects) {
     project.todos.forEach((todo, index) => {
       const card = createTodoCard(todo, index, parentIndex);
       cards.appendChild(card);
+
+    
     });
   });
 
   return cards;
+}
+
+// function addTodoButton(){
+//   const button = document.createElement('button');
+//   button.classList.add('add-todo-button');
+//   button.textContent = "+";
+//   return button;
+// }
+export function renderProjectCards(project,parentIndex){
+
+  const main = document.querySelector('main');
+  main.innerHTML="";
+  if(project == undefined){
+    main.textContent = "No todo's present in this project!";
+    return
+  }
+  const projectCards = (()=>{
+    const cards = document.createElement("div");
+    cards.classList.add("cards");
+      const title = document.createElement("h2");
+      title.textContent = project.name;
+      cards.appendChild(title);
+  
+      project.todos.forEach((todo, index) => {
+        const card = createTodoCard(todo, index, parentIndex);
+        cards.appendChild(card);
+      });
+      return cards;
+  })()
+  main.appendChild(projectCards);
+  main.appendChild(addTodoButton());
+
 }
 
 export default function main() {
@@ -116,6 +151,7 @@ export default function main() {
 
   const projectCards = createProjectCards(projects);
   main.appendChild(projectCards);
+  main.appendChild(addTodoButton());
 
   console.log(projects);
 
@@ -123,4 +159,4 @@ export default function main() {
 }
 
 
-export {projects};
+// export {projects};

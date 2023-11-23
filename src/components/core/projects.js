@@ -1,6 +1,8 @@
 import Project from "./project";
 import Todo from "./todo";
 const projects = [];
+const defaultProject = new Project("Default Project");
+
 const project1 = new Project("helo");
 
 const taskNames = ["Task A", "Task B", "Task C", "Task D", "Task E", "Task F"];
@@ -28,6 +30,8 @@ for (let i = 0; i < 6; i++) {
 
   project1.addTodo(new Todo(randomName, randomDescription, randomDate, randomPriority));
 }
+
+projects.push(defaultProject);
 
 // Add more todos...
 projects.push(project1);

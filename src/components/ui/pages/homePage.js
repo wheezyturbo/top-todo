@@ -2,6 +2,8 @@ import header from "../utils/header";
 import sidebar from "../utils/sidebar";
 import Main from "../utils/main";
 
+let currentPage = "home";
+
 export default function render(){
     if(document.querySelector('.grid-container'))document.body.innerHTML="";
     const main = document.createElement('div');
@@ -16,4 +18,5 @@ export default function render(){
 
     document.body.appendChild(main);
 }
+
 

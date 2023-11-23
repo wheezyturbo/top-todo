@@ -1,14 +1,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600;800&family=Work+Sans:wght@200;400;600;800&display=swap");
 :root {
-  font-family:"work sans";
+  font-family: "work sans";
   box-sizing: border-box;
 }
-*,*::before,*::after{
-    margin:0;
-    padding:0;
-    box-sizing: border-box;
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-
 
 :root[data-theme="light"] {
   --text: #00020a;
@@ -16,7 +17,7 @@
   --primary: #7083fa;
   --secondary: #bac3fd;
   --accent: #0825e2;
-  --project-btn:
+  --project-btn: ;
 }
 :root[data-theme="dark"] {
   --text: #f5f7ff;
@@ -24,24 +25,25 @@
   --primary: #05188f;
   --secondary: #020b45;
   --accent: #1d3af7;
-  --project-btn:#992ad0;
+  --project-btn: #992ad0;
 }
-body{
-    background-color:var(--background);
-    color: var(--text);
+body {
+  background-color: var(--primary);
+  color: var(--text);
 }
 
-nav a,aside button{
-    font-weight: 600;
+nav a,
+aside button {
+  font-weight: 600;
 }
 
 /* homePage.js */
 .grid-container {
   display: grid;
-  background:var(--background);
-  height:100vh;
-  grid-template-rows: repeat(12,1fr);
-  grid-template-columns: repeat(12,1fr);
+  background: var(--background);
+  height: 100vh;
+  grid-template-rows: repeat(12, 1fr);
+  grid-template-columns: repeat(12, 1fr);
 }
 
 /* sidebar.js */
@@ -49,63 +51,150 @@ nav a,aside button{
   grid-column: 1 / span 3;
   grid-row: 1;
   background-color: var(--primary);
-  display: grid; 
-  grid-template-rows: repeat(12,1fr);
+  display: grid;
+  grid-template-rows: repeat(12, 1fr);
   height: 100vh;
 }
-aside button{
-    border: none;
+aside button {
+  border: none;
+  border-radius: 8px;
+  background-color: var(--project-btn);
+  padding: 10px 20px;
+  color: var(--text);
+  width: calc(100% - 60px);
+  margin: 40px auto;
+  cursor: pointer;
+  transition: 0.1s ease-in-out;
+}
+aside .projects {
+  display: flex;
+  flex-direction: column;
+}
+aside .projects h2 {
+  margin: 0 auto;
+  margin-bottom: 10px;
+}
+
+aside .projects button {
+  background-color: var(--accent);
+  margin: 10px auto;
+}
+
+aside button:hover {
+  background-color: var(--secondary);
+  box-shadow: 3px 3px 3px rgb(0, 0, 0, 0.025);
+}
+aside button:active {
+  background-color: var(--background);
+  box-shadow: none;
+}
+.add-project-div {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  backdrop-filter: blur(10px) grayscale() brightness(0.5);
+
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateX(-200px);
+  }
+  to {
+    transform: translateX(0px);
+  }
+}
+
+.add-project-form {
+  position: relative;
+  padding: 60px 40px;
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  animation-name:slide-in;
+  animation-duration: 0.3s;
+  gap:8px;
+}
+.add-project-form .add-project-button{
+    align-self: center;
+    padding: 5px 30px;
     border-radius: 8px;
-    background-color: var(--project-btn);
-    padding:10px 20px;
-    color: var(--text);
-    width: calc(100% - 60px);
-    margin: 40px auto;
-    cursor:pointer;
-    transition: 0.1s ease-in-out;
+    border: none;
+    background: var(--primary);
+    font-weight: 600;
+    color: white;
 }
-aside .projects{
-    display: flex;
-    flex-direction:column;
+.add-project-form .name-input{
+    background:none;
+    caret-color: white;
+    padding:5px 20px;
+    color:white;
+    font-size:1.3rem;
 }
-aside .projects h2{
-    margin:0 auto;
-    margin-bottom:10px;
-}
-
-aside .projects button{
-    background-color: var(--accent);
-    margin: 10px auto;
+.add-project-form .name-input:focus{
+  outline:none;
+  border:none;
+  border-radius:8px;
+  background-color: var(--primary);
+  font-weight:600;
 }
 
-aside button:hover{
-    background-color: var(--secondary);
-    box-shadow: 3px 3px 3px rgb(0, 0, 0,0.025);
+.closeBtn {
+  position: absolute;
+  border: none;
+  background: none;
+  color: red;
+  right: 20px;
+  top: 40px;
+  font-size: 2rem;
+  font-weight: 600;
 }
-aside button:active{
-    background-color:var(--background);
-    box-shadow:none;
-}
-
 
 /* header.js */
-.div-container{
+.div-container {
   grid-column: span 9;
   display: grid;
-  grid-template-rows: repeat(12,1fr);
+  grid-template-rows: repeat(12, 1fr);
 }
-.main-grid{
-    background-color: var(--secondary);
-    grid-row: span 11;
-    margin-top:10px;
-    padding-top: 10px;
-    height: calc(100vh - 55px); /* Subtracted 100px to account for header and any top margin */
-    overflow-y: auto; /* Add vertical scrollbar if content overflows */
+.main-grid {
+  display:relative;
+  background-color: var(--secondary);
+  grid-row: span 11;
+  margin-top: 10px;
+  padding-top: 10px;
+  height: calc(
+    100vh - 55px
+  ); /* Subtracted 100px to account for header and any top margin */
+  overflow-y: auto; /* Add vertical scrollbar if content overflows */
 }
+
+.main-grid .add-todo-button{
+  position:absolute;
+  height: 50px;
+  font-size:2rem;
+  aspect-ratio:1;
+  display: flex;
+  justify-content:center;
+  align-items:center;
+  padding:10px;
+  font-weight:800;
+  color:var(--primary);
+  border:none;
+  border-radius:50%;
+  text-align: center;
+  bottom:5%;
+  right:5%;
+}
+
 .grid-container header {
-    width: 100%;
-    /* background-color: var(--secondary); */
-    background-color: #015b8c;
+  width: 100%;
+  /* background-color: var(--secondary); */
+  background-color: #015b8c;
 }
 
 .grid-container header nav {
@@ -113,97 +202,82 @@ aside button:active{
   width: 100%;
   grid-template-columns: repeat(3, 1fr);
   justify-items: center;
-  margin-top:40px;
+  margin-top: 40px;
 }
-.grid-container header nav a{
-    cursor:pointer;
-    text-transform: capitalize;
-    transition:0.3s  ease-in-out;
-    font-size: 1.2rem;
+.grid-container header nav a {
+  cursor: pointer;
+  text-transform: capitalize;
+  transition: 0.3s ease-in-out;
+  font-size: 1.2rem;
 }
 
-.grid-container header nav a.active{
-    text-decoration: underline;
-    text-decoration-color: lightcoral;
-    color:var(--text);
-    text-decoration-thickness: 3px;
+.grid-container header nav a.active {
+  text-decoration: underline;
+  text-decoration-color: lightcoral;
+  color: var(--text);
+  text-decoration-thickness: 3px;
 }
 
 /* main */
-.main-container{
-    background-color: var(--secondary);
-    height:100%;
+.main-container {
+  background-color: var(--secondary);
+  height: 100%;
 }
-.cards{
-    width:100%;
-    display:grid;
-    grid-template-rows: 1fr;
-    gap:16px;
-    max-width: 1000px;
-    margin:0 auto;
+.cards {
+  width: 100%;
+  display: grid;
+  grid-template-rows: 1fr;
+  gap: 16px;
+  max-width: 1000px;
+  margin: 0 auto;
 }
-.card{
-    display: flex;
-    width:100%;
-    justify-content:space-evenly;
-    padding:30px;
-    background-color: var(--primary);
-    border-left: 5px solid yellow;
-    border-radius: 15px;
-    box-shadow:3px 3px 3px rgb(0, 0, 0,0.25);
-    transition: 0.2s ease-in-out;
+.card {
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+  padding: 30px;
+  background-color: var(--primary);
+  border-left: 5px solid yellow;
+  border-radius: 15px;
+  box-shadow: 3px 3px 3px rgb(0, 0, 0, 0.25);
+  transition: 0.2s ease-in-out;
 }
-.card:hover{
-    transform: scale(1.01);
+.card:hover {
+  transform: scale(1.01);
 }
-.card input[type="checkbox"]{
-    outline:none;
-    border: none;    
-}
-
-.card button{
-    border:none;
-    outline: none;
-    border-radius:10px;
-    padding:5px 10px;
-    background:var(--accent);
-    color: var(--background);
-    font-weight: 600;
+.card input[type="checkbox"] {
+  outline: none;
+  border: none;
 }
 
-.checked>*:nth-child(1),.checked>*:nth-child(4){
-    text-decoration: line-through;
-    text-decoration-color:black;
-    text-decoration-thickness: 3px;
-}
-.add-project-div{
-    position: absolute;
-    left:0;
-    right:0;
-    top:0;
-    bottom:0;
-    display: flex;
-    backdrop-filter: blur(10px) grayscale() brightness(0.5);
+.card button {
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  padding: 5px 10px;
+  background: var(--accent);
+  color: var(--background);
+  font-weight: 600;
 }
 
-.add-project-form{
-    position: relative;
-    padding:60px 40px;
-    background-color: black;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items:center;
+.checked > *:nth-child(1),
+.checked > *:nth-child(4) {
+  text-decoration: line-through;
+  text-decoration-color: black;
+  text-decoration-thickness: 3px;
 }
 
-.closeBtn{
-    position:absolute;
-    border:none;
-    background:none;
-    color:red;
-    right:20px;
-    top:40px;
-    font-size:2rem;
-    font-weight:600;
 
+.add-todo-div{
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  display: flex;
+  flex-direction:column;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(10px);
+  animation:slide-in 0.3s;
 }
