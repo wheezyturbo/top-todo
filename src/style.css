@@ -1,7 +1,6 @@
 /* General Styling */
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600;800&family=Work+Sans:wght@200;400;600;800&display=swap");
 body {
-    font-family: 'work sans','Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 0;
     background-color: #121212;
@@ -135,8 +134,16 @@ body {
     cursor: pointer;
     box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2),
                 -4px -4px 8px rgba(255, 255, 255, 0.05);
+    animation-name:twirl;
+    animation-duration:.5s;
+    
   }
-  
+  @keyframes twirl {
+    from {transform: translateX(20px) rotate(180deg);}
+    to{transform: translateX(0px) rotate(0deg);}
+  }
+
+
   .add-todo-btn:hover {
     background-color: #0056b3;
   }
@@ -276,19 +283,38 @@ button{
     font-family: "poppins";
 }
 
+@keyframes lightning {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+    background: linear-gradient(90deg, transparent, rgba(129, 211, 7, 0.2));
+  }
+  40% {
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+    /* background: transparent; */
+  }
+}
+.active-project{
+  border-bottom:5px solid cadetblue;
+  animation: lightning 0.5s ease-out forwards;}
 
 .completed {
 	filter: brightness(0.5) grayscale();
 }
 
-.active-project{
-  border-bottom:5px solid cadetblue;
-}
+
 
 .project-card {
 	display: grid;
 	justify-content: space-between;
-	grid-template-columns: 5fr 1fr;
+	grid-template-columns: 1fr 5fr 1fr;
 }
 
 .project-card span:nth-child(2){

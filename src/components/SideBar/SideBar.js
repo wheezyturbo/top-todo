@@ -53,6 +53,7 @@ function createProjectCard(project,index) {
     card.classList.add("active-project");
   }
   const span = document.createElement('span');
+  span.id = "span";
 
   span.textContent = project.title;
   const deleteBtn = document.createElement("span");
@@ -67,6 +68,18 @@ function createProjectCard(project,index) {
     app.currentPage = project.title;
     render();
   });
+
+
+  const edit = document.createElement('span');
+  edit.textContent = "🖍️";
+
+  edit.addEventListener('click',(e)=>{
+    document.getElementById('span').contentEditable = true;
+    edit.innerHTML = "";
+    edit.innerHTML = "<button>/</button>";
+  })
+
+  card.appendChild(edit);
   card.appendChild(span);
   card.appendChild(deleteBtn);
   return card;
