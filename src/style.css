@@ -1,6 +1,7 @@
 /* General Styling */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600;800&family=Work+Sans:wght@200;400;600;800&display=swap");
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'work sans','Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 0;
     background-color: #121212;
