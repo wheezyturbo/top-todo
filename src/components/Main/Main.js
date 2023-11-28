@@ -3,7 +3,6 @@ import app from "../../core/app";
 import render from "../../core/render/render";
 import AddTodoButton from "../AddTodoButton/AddTodoButton";
 
-
 export default function Main() {
   const main = document.createElement("main");
   main.classList.add("main");
@@ -35,25 +34,30 @@ export default function Main() {
       h2.textContent = project.title;
       cards.append(h2);
       project.todos.forEach((todo, index) => {
+        if(todo.dueDate){
+          console.log(todo.dueDate);
         const { days } = intervalToDuration({
           start: new Date(todo.dueDate),
           end: new Date(),
         });
-        if (days >= 1 && days <= 7) {
+        if (
+          new Date(todo.dueDate).getDate() != new Date().getDate() &&
+          days <= 7
+        ) {
           const card = createTodoCard(todo, index, projectIndex);
           cards.appendChild(card);
-        }
+        }}
       });
     } else if (app.currentPage == "today") {
       const h2 = document.createElement("h2");
       h2.textContent = project.title;
       cards.append(h2);
       project.todos.forEach((todo, index) => {
-        const { days} = intervalToDuration({
-          start: new Date(todo.dueDate),
-          end: new Date(),
-        });
-        if (days>=0 && days<1) {
+        // const { days } = intervalToDuration({
+        //   start: new Date(todo.dueDate),
+        //   end: new Date(),
+        // });
+        if (new Date(todo.dueDate).getDate() == new Date().getDate()) {
           const card = createTodoCard(todo, index, projectIndex);
           cards.appendChild(card);
         }

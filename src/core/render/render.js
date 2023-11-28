@@ -10,6 +10,7 @@ export default function render() {
   body.appendChild(header());
   body.appendChild(sidebar());
   body.appendChild(Main());
+
 //   if ((app.currentPage != "this_week")||(app.currentPage!="home")||(app.currentPage!="today")) {
 //     body.appendChild(AddTodoButton());
 //   }

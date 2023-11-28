@@ -360,3 +360,9 @@ form.show-rename-project-form {
   gap: 10px;
   backdrop-filter: blur(20px);
 }
+
+
+.active{
+  color:#00a2ff !important;
+  transition: 0.2s ease-out;
+}
