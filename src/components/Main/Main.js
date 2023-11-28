@@ -109,6 +109,8 @@ function createTodoCard(todo, index, projectIndex) {
     } else {
       todo.setCompleted(true);
     }
+    app.saveProjectsToLocalStorage();
+
     // e.target.parentNode.classList.toggle("completed");
     render();
   });
@@ -132,6 +134,7 @@ function createTodoCard(todo, index, projectIndex) {
     const todoIndex = e.target.parentNode.getAttribute("data-todo-index");
     console.log(e.target.parentNode);
     app.projects[projectIndex].removeTodo(todoIndex);
+    app.saveProjectsToLocalStorage();
     render();
   });
 
@@ -195,6 +198,7 @@ function todoDetailsView(todo, index, projectIndex) {
     );
     app.projects[projectIndex].todos[index].setDueDate(dateInput.value);
     app.projects[projectIndex].todos[index].setPriority(priorityInput.value);
+    app.saveProjectsToLocalStorage();
     render();
   });
 
