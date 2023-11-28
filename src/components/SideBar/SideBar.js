@@ -37,31 +37,31 @@ export default function sidebar() {
 
   const projectCards = document.createElement("div");
   projectCards.classList.add("project-cards-div");
-  app.projects.forEach((project,index) => {
-    projectCards.appendChild(createProjectCard(project,index));
+  app.projects.forEach((project, index) => {
+    projectCards.appendChild(createProjectCard(project, index));
   });
   sidebar.appendChild(projectCards);
   return sidebar;
 }
 
-function createProjectCard(project,index) {
+function createProjectCard(project, index) {
   const card = document.createElement("div");
   card.classList.add("project-card");
-  card.setAttribute('data-project-index',index);
+  card.setAttribute("data-project-index", index);
   if (app.currentPage == project.title) {
     // card.classList.add("active");
     card.classList.add("active-project");
   }
-  const span = document.createElement('span');
+  const span = document.createElement("span");
   span.id = "span";
 
   span.textContent = project.title;
   const deleteBtn = document.createElement("span");
   deleteBtn.textContent = "X";
   deleteBtn.addEventListener("click", (e) => {
-    const projectIndex = e.target.parentNode.getAttribute('data-project-index');
-    app.projects.splice(projectIndex,1);
-    app.currentPage="home";
+    const projectIndex = e.target.parentNode.getAttribute("data-project-index");
+    app.removeProject(projectIndex);
+    app.currentPage = "home";
     render();
   });
   span.addEventListener("click", () => {
@@ -69,18 +69,51 @@ function createProjectCard(project,index) {
     render();
   });
 
-
-  const edit = document.createElement('span');
+  const edit = document.createElement("span");
   edit.textContent = "🖍️";
 
-  edit.addEventListener('click',(e)=>{
-    document.getElementById('span').contentEditable = true;
-    edit.innerHTML = "";
-    edit.innerHTML = "<button>/</button>";
-  })
+  edit.addEventListener("click", (e) => {
+    document.body.appendChild(
+      showRenameProjectModal(
+        e.target.parentNode.getAttribute("data-project-index")
+      )
+    );
+    // edit.innerHTML = "<button>/</button>";
+  });
 
   card.appendChild(edit);
   card.appendChild(span);
   card.appendChild(deleteBtn);
   return card;
+}
+
+function showRenameProjectModal(parent) {
+  const div = document.createElement("div");
+  div.classList.add("show-rename-project-modal");
+  const form = document.createElement("form");
+  form.classList.add("show-rename-project-form");
+  const input = document.createElement("input");
+  input.value = app.projects[parent].title;
+  input.classList.add("show-rename-input");
+  const button = document.createElement("button");
+  button.textContent = "Rename";
+  button.addEventListener("click", (e) => {
+    e.preventDefault();
+    app.projects[parent].setTitle(input.value);
+    render();
+  });
+  const close = document.createElement("button");
+  close.textContent = "X";
+  close.classList.add("rename-close-button");
+  close.addEventListener("click", (e) => {
+    e.preventDefault();
+    document.body.removeChild(
+      document.querySelector(".show-rename-project-modal")
+    );
+  });
+  form.appendChild(input);
+  form.appendChild(close);
+  form.appendChild(button);
+  div.appendChild(form);
+  return div;
 }

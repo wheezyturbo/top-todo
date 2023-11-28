@@ -21,7 +21,7 @@ function createAndAppend(parent, elementType, className, textContent,type=null) 
 // Function to show the modal
 function showModal() {
   console.log(app.currentPage);
-  if (app.currentPage == "home") {
+  if (app.currentPage == "home" || app.currentPage == "today" || app.currentPage =="this_week") {
     alert("Click on a project to add a new todo!");
     return;
   }
@@ -98,6 +98,7 @@ function showModal() {
 }
 
 export default function AddTodoButton() {
+  console.log(app.currentPage);
   const button = createAndAppend(document.body, "button", "add-todo-btn", "+");
   button.addEventListener("click", showModal);
   return button;

@@ -1,13 +1,16 @@
+import { intervalToDuration } from "date-fns";
 import app from "../../core/app";
 import render from "../../core/render/render";
+import AddTodoButton from "../AddTodoButton/AddTodoButton";
+
 
 export default function Main() {
   const main = document.createElement("main");
   main.classList.add("main");
   const cards = document.createElement("div");
   cards.classList.add("todo-cards");
-  if(app.currentPage==null){
-    app.currentPage="home";
+  if (app.currentPage == null) {
+    app.currentPage = "home";
   }
   app.projects.forEach((project, projectIndex) => {
     if (app.currentPage == "home") {
@@ -26,8 +29,37 @@ export default function Main() {
         const card = createTodoCard(todo, index, projectIndex);
         cards.appendChild(card);
       });
+      main.appendChild(AddTodoButton());
+    } else if (app.currentPage == "this_week") {
+      const h2 = document.createElement("h2");
+      h2.textContent = project.title;
+      cards.append(h2);
+      project.todos.forEach((todo, index) => {
+        const { days } = intervalToDuration({
+          start: new Date(todo.dueDate),
+          end: new Date(),
+        });
+        if (days >= 1 && days <= 7) {
+          const card = createTodoCard(todo, index, projectIndex);
+          cards.appendChild(card);
+        }
+      });
+    } else if (app.currentPage == "today") {
+      const h2 = document.createElement("h2");
+      h2.textContent = project.title;
+      cards.append(h2);
+      project.todos.forEach((todo, index) => {
+        const { days} = intervalToDuration({
+          start: new Date(todo.dueDate),
+          end: new Date(),
+        });
+        if (days>=0 && days<1) {
+          const card = createTodoCard(todo, index, projectIndex);
+          cards.appendChild(card);
+        }
+      });
     }
-    main.appendChild(cards);
+    // main.appendChild(cards);
   });
 
   main.appendChild(cards);
@@ -39,11 +71,10 @@ function createTodoCard(todo, index, projectIndex) {
   card.classList.add("todo-card");
   card.classList.add(`${todo.priority}`);
 
-  if(todo.isCompleted){
-    card.classList.add('completed');
-  }
-  else{
-    card.classList.remove('completed');
+  if (todo.isCompleted) {
+    card.classList.add("completed");
+  } else {
+    card.classList.remove("completed");
   }
   // card.innerHTML = `
   //       <h3>${index}</h3>
@@ -138,19 +169,17 @@ function todoDetailsView(todo, index, projectIndex) {
   const priorityLabel = document.createElement("label");
   priorityLabel.textContent = "Priority: ";
 
-  const priorityInput = document.createElement('select');
+  const priorityInput = document.createElement("select");
   priorityInput.name = "priorities";
   priorityInput.id = "priorities";
-  const priorities = ["low","medium","high"];
-  priorities.forEach(p=>{
-    const option = document.createElement('option');
+  const priorities = ["low", "medium", "high"];
+  priorities.forEach((p) => {
+    const option = document.createElement("option");
     option.textContent = p;
     option.value = p;
     priorityInput.appendChild(option);
-  })
+  });
   priorityInput.value = todo.priority;
-
-
 
   const change = document.createElement("button");
   change.textContent = "Change";

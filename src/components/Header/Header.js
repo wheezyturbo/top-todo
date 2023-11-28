@@ -1,5 +1,6 @@
 import app from "../../core/app";
 import render from "../../core/render/render";
+import intervalToDuration from "date-fns/intervalToDuration";
 
 export default function header() {
   const headerContainer = document.createElement("div");
@@ -8,21 +9,24 @@ export default function header() {
   const todayTab = document.createElement("button");
   todayTab.textContent = "Today";
   todayTab.addEventListener("click", () => {
-    // Handle logic for "Today" tab click
+    todayTab.classList.add("active");
+    app.currentPage = "today";
+    render();
   });
 
   const thisWeekTab = document.createElement("button");
   thisWeekTab.textContent = "This Week";
   thisWeekTab.addEventListener("click", () => {
-    // Handle logic for "This Week" tab click
+    thisWeekTab.classList.add("active");
+    app.currentPage = "this_week";
+    render();
   });
 
   const allTodosTab = document.createElement("button");
   allTodosTab.textContent = "All Todos";
   allTodosTab.addEventListener("click", () => {
-    // Handle logic for "All Todos" tab click
-    app.currentPage="home";
-    allTodosTab.classList.add('active');
+    app.currentPage = "home";
+    allTodosTab.classList.add("active");
     render();
   });
 
@@ -30,6 +34,5 @@ export default function header() {
   headerContainer.appendChild(thisWeekTab);
   headerContainer.appendChild(allTodosTab);
 
-  // Append the header to a container in your HTML (assuming 'app' is a container)
   return headerContainer;
 }
